@@ -14,14 +14,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 52 6	1 * *	root	test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 #
 
-@reboot 	root /etc/cron.usr/cron_reboot.sh
-*  *    * * *   root /etc/cron.usr/cron_1min.sh 
-*/5 *   * * * 	root /etc/cron.usr/cron_5min.sh
-0  *    * * *   root /etc/cron.usr/cron_1hr.sh 
-0  0    * * *   root /etc/cron.usr/cron_1day.sh
-0  0    * * 0   root /etc/cron.usr/cron_1wk.sh
-0  0    1 * *   root /etc/cron.usr/cron_1month.sh
-
+@reboot 	root cron_reboot.sh
 *  *    * * *   root cron_1min.sh
 */5 *   * * *   root cron_5min.sh
 0  *    * * *   root cron_1hr.sh

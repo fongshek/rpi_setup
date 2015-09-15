@@ -55,7 +55,7 @@ class mcp23017_1602:
     def __init__(self, addr, port):
         self.addr = addr
         self.port = port
-        self.mc23017 = mcp23017(DEVICE_ADDRESS,port)
+        self.mc23017 = mcp23017(self.addr,port)
         self.init_mcp23017()
         self.lcd1602 = lcd1602("LCD1602",0);
         self.lcd1602.on_update_io = self.on_update_1602IO
@@ -105,6 +105,9 @@ class mcp23017_1602:
 #        print "read button " + format(val,'05b')
         return val
        
+    def display_current_time(self):
+        print "Display current time"
+       
     def test(self):
         print ("testing mcp23017 + LCD1602 + RGB")
 
@@ -137,13 +140,17 @@ class mcp23017_1602:
             self.lcd1602.write_string(1,0,"IN " + tstr + "          ")
             time.sleep(0.1)
 
-if (1) : 
+if (0) : 
 
     DEVICE_ADDRESS = 0x20      #7 bit address (will be left shifted to add the read write bit)
     print "init mcp23017 lcd1602"
     myDevice = mcp23017_1602(DEVICE_ADDRESS,0)
 #    myDevice.test();
+
     if (1):
+        myDevice.display_current_time();
+
+    if (0):
         myDevice.led_r(1)
         time.sleep(0.01)
         myDevice.led_r(0)
@@ -159,16 +166,16 @@ if (1) :
         myDevice.led_b(0)
         time.sleep(0.5)
     
-    myDevice.lcd1602.backlight(1)
-    myDevice.lcd1602.clear_display()
-    myDevice.lcd1602.return_home()
-    myDevice.lcd1602.write_string(0,0,"MCP23017 - LCD ")
-    myDevice.lcd1602.write_string(1,0,"0123456789ABCDEF")
-    myDevice.lcd1602.set_cursor(0,100)
-    
-    print "Reading Buttons"
-    while (1):
-        val = myDevice.read_button()
-        tstr = format(val,'05b')
-        myDevice.lcd1602.write_string(1,0,"IN " + tstr + "          ")
-        time.sleep(0.1)    
+        myDevice.lcd1602.backlight(1)
+        myDevice.lcd1602.clear_display()
+        myDevice.lcd1602.return_home()
+        myDevice.lcd1602.write_string(0,0,"MCP23017 - LCD ")
+        myDevice.lcd1602.write_string(1,0,"0123456789ABCDEF")
+        myDevice.lcd1602.set_cursor(0,100)
+        
+        print "Reading Buttons"
+        while (1):
+            val = myDevice.read_button()
+            tstr = format(val,'05b')
+            myDevice.lcd1602.write_string(1,0,"IN " + tstr + "          ")
+            time.sleep(0.1)    

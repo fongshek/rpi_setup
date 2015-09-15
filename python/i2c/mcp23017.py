@@ -85,7 +85,7 @@ class mcp23017:
         self.write_reg(0x15, 0x00)
 
 
-if (1) : 
+if (0) : 
 
     DEVICE_ADDRESS = 0x20      #7 bit address (will be left shifted to add the read write bit)
     print "init mcp23017 "

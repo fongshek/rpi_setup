@@ -40,9 +40,9 @@ class DomainOperations:
         t1.start()
         t2.start()
 
-        t1.join()
-        t2.join()
-        t3.join()
+#        t1.join()
+#        t2.join()
+#        t3.join()
         print "Ending ", self.domain_ip, self.website_thumbnail
 
 a=DomainOperations("www.google.com")

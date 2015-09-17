@@ -4,6 +4,18 @@ import sys, getopt
 from mcp23017_1602 import mcp23017_1602
 from pcf8574_1602 import pcf8574_1602
 from config import cConfig
+import paho.mqtt.client as paho   # pip install paho-mqtt
+
+
+class mqtt_lcd_display:
+    def __init__(self, config_file):
+        self.config_file = config_file
+        self.parse_config()
+        
+    def parse_config(self):
+        print self.config_file
+
+
 
 def write_message(config):
     print "writting  message to LCD"
@@ -56,21 +68,19 @@ def print_config(config):
     print "lcd_message1 : " ,config.lcd_message 
  
 def read_config(argv):
-    lcd_config = 'lcd_module.conf'
+    lcd_config = 'mqtt_lcd_display.conf'
     lcd_message = ""
     try:
-      opts, args = getopt.getopt(argv,"hc:m:")
+      opts, args = getopt.getopt(argv,"hc:")
     except getopt.GetoptError:
-      print 'lcd_displayEx.py -c <configfile> -m <message>'
+      print 'lcd_displayEx.py -c <configfile>'
       sys.exit(2)
     for opt, arg in opts:
       if opt == '-h':
-         print 'lcd_displayEx.py -c <configfile> -m <message>'
+         print 'lcd_displayEx.py -c <configfile> '
          sys.exit()
       elif opt in ("-c", "--cfile"):
          lcd_config = arg
-      elif opt in ("-m"):        
-         lcd_message = arg
 
     lCfg = cConfig(lcd_config)
     lCfg.lcd_message = lcd_message

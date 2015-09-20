@@ -1,17 +1,13 @@
-chmod +x *.sh
-
-dest_folder="/usr/local/bin/"
-echo "copy all .sh to " + $dest_folder
-mkdir -p $dest_folder
-cp cron*.sh $dest_folder
-
-dest_folder="/etc/"
-echo "copy crontab to " + $dest_folder
-mkdir -p $dest_folder
-cp crontab $dest_folder
-
+#chmod +x *.sh -r
+chmod -Rf +x ./
 dest_folder="/home/iot/bin"
-echo "copy duckdns.sh to " + $dest_folder
-mkdir -p $dest_folder
-cp duckdns.sh $dest_folder
+echo "copy current folder to "  $dest_folder
+cp -r ./ $dest_folder
+rm /usr/local/bin/cron*sh
+ln -s $dest_folder/cron_1day.sh /usr/local/bin/cron_1day.sh
+ln -s $dest_folder/cron_1hr.sh /usr/local/bin/cron_1hr.sh
+ln -s $dest_folder/cron_1min.sh /usr/local/bin/cron_1min.sh
+ln -s $dest_folder/cron_5min.sh /usr/local/bin/cron_5min.sh
+ln -s $dest_folder/cron_reboot.sh /usr/local/bin/cron_reboot.sh
+
 

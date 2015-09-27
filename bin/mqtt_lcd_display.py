@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys, getopt
+import os
 from lib.mcp23017_1602 import mcp23017_1602
 from lib.pcf8574_1602 import pcf8574_1602
 from lib.config import cConfig
@@ -11,6 +12,9 @@ from datetime import datetime
 import time
 import paho.mqtt.client as mqtt
 import Queue
+
+
+mypath = os.path.abspath(os.path.dirname(__file__))
 
 class mqtt_lcd_display:
 
@@ -200,7 +204,7 @@ def mqtt_on_message(client, userdata, msg):
 
  
 def parse_argv(argv):
-    lcd_config = 'mqtt_lcd_display.conf'
+    lcd_config = mypath + '/mqtt_lcd_display.conf'
     lcd_message = ""
     try:
       opts, args = getopt.getopt(argv,"hc:m:") 

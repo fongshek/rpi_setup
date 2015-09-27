@@ -7,6 +7,7 @@ from datetime import datetime
 from datetime import timedelta
 
 mypath = os.path.abspath(os.path.dirname(__file__))
+iotpath = "/home/iot/bin"
 
 class cCron:
 
@@ -44,16 +45,23 @@ class cCron:
         print self.name, self.uptime , self.time
 
 
+def cron_test():
+#    print mypath
+    script = "python " + iotpath + "/mqtt_lcd_publish.py  -m \"@ip\""
+    os.system(script)
+
 def cron_boot():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_boot\" | wall -n"
     os.system(script)
+#    script = "python " + iotpath + "/mqtt_lcd_display.py  &"
+#    os.system(script)
 
 def cron_1min():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_1min\" | wall -n"
     os.system(script)
-    script = "sh " + mypath + "/duckdns.sh"
-    os.system(script)
-    
+#    script = "python " + iotpath + "/mqtt_lcd_publish.py  -m \"@ip\""
+#    os.system(script)
+   
 def cron_2min():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_2min\" | wall -n"
     os.system(script)
@@ -61,14 +69,15 @@ def cron_2min():
 def cron_5min():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_5min\" | wall -n"
     os.system(script)
-
+#    script = "sh " + iotpath + "/duckdns.sh"
+#    os.system(script)
 
 def cron_1hr():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_1hr\" | wall -n"
     os.system(script)
 
 def main():
-    print mypath
+#    print mypath
     myCron = cCron("myCron")
 #    myCron.test();
     par = sys.argv[1:]
@@ -84,6 +93,10 @@ def main():
     else :
         if (par[0] == "boot"):
             cron_boot()
+        if (par[0] == "test"):
+            cron_test()
+            
+            
 
 if __name__ == "__main__":
     main();

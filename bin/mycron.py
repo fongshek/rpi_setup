@@ -55,6 +55,9 @@ def cron_boot():
     os.system(script)
 #    script = "python " + iotpath + "/mqtt_lcd_display.py  &"
 #    os.system(script)
+    
+#    script = "python " + iotpath + "/mqtt2mysql.py  -c m2m_d2m.conf&"
+#    os.system(script)
 
 def cron_1min():
     script = "echo $(date +\"%y%m%d-%H%M%S\")  \"> execute > cron_1min\" | wall -n"
